@@ -2,14 +2,12 @@ package com.pengelkes.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Created by pengelkes on 25.10.2016.
  */
+@Entity
 public class Comment
 {
     @Id

@@ -10,6 +10,7 @@ import java.util.List;
  * Created by pengelkes on 25.10.2016.
  */
 @Entity
+@Table(name = "user_account")
 public class User
 {
     @Id

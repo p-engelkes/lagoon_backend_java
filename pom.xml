@@ -55,6 +55,12 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.6.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.4.1208-jdbc42-atlassian-hosted</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -65,6 +71,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>
