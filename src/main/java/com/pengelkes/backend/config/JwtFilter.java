@@ -3,11 +3,9 @@ package com.pengelkes.backend.config;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureException;
+import org.springframework.web.filter.GenericFilterBean;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -16,7 +14,7 @@ import java.io.IOException;
  * Created by pengelkes on 27.10.2016.
  */
 
-public class JwtFilter
+public class JwtFilter extends GenericFilterBean
 {
     public void doFilter(final ServletRequest req,
                          final ServletResponse res,

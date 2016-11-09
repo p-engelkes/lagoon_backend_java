@@ -8,4 +8,6 @@ import com.pengelkes.backend.model.User;
 public interface UserService
 {
     User save(User user);
+
+    User findByUserName(String userName);
 }
