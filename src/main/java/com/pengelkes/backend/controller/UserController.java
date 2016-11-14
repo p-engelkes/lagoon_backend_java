@@ -2,6 +2,7 @@ package com.pengelkes.backend.controller;
 
 import com.pengelkes.backend.model.User;
 import com.pengelkes.backend.service.UserService;
+import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,9 +33,11 @@ public class UserController
     }
 
     @RequestMapping(value="/login", method = RequestMethod.POST)
-    public String login(@RequestBody Map<String, String> json) throws ServletException {
-        if (json.get("username") == null || json.get("password") == null) {
-            throw new ServletException("Plese fill in username and password");
+    public String login(@RequestBody Map<String, String> json) throws ServletException
+    {
+        if (json.get("username") == null || json.get("password") == null)
+        {
+            throw new ServletException("Please fill in username and password!");
         }
 
         String userName = json.get("username");
@@ -42,14 +45,16 @@ public class UserController
 
         User user = userService.findByUserName(userName);
 
-        if (user == null) {
-            throw new ServletException("Username not found");
+        if (user == null)
+        {
+            throw new ServletException("Username not found!");
         }
 
         String pwd = user.getPassword();
 
-        if (!password.equals(pwd)) {
-            throw new ServletException("Invalid login. Please check your username and password");
+        if (!password.equals(pwd))
+        {
+            throw new ServletException("Invalid login. Please check your name and password!");
         }
 
         return Jwts.builder()
