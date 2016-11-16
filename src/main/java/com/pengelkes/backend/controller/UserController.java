@@ -2,10 +2,12 @@ package com.pengelkes.backend.controller;
 
 import com.pengelkes.backend.model.User;
 import com.pengelkes.backend.service.UserService;
+import com.pengelkes.backend.validation.UserNameExistsException;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,13 +25,21 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController
 {
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService,
+                          PasswordEncoder passwordEncoder)
+    {
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
-    public User registerUser(@RequestBody User user)
+    public User registerUser(@RequestBody User user) throws UserNameExistsException
     {
-        return userService.save(user);
+        return userService.registerNewUser(user);
     }
 
     @RequestMapping(value="/login", method = RequestMethod.POST)
@@ -41,7 +51,7 @@ public class UserController
         }
 
         String userName = json.get("username");
-        String password = json.get("password");
+        String password = passwordEncoder.encode(json.get("password"));
 
         User user = userService.findByUserName(userName);
 
