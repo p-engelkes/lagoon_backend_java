@@ -25,9 +25,7 @@ public class SetupBean
     @PostConstruct
     public void setupUser()
     {
-        final User user = new User();
-        user.setUserName("admin@fake.com");
-        user.setPassword("adminpass");
+        final User user = new User("admin@fake.com", "adminpass");
         try
         {
             userService.registerNewUser(user);

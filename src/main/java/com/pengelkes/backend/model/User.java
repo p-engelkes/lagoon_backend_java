@@ -15,7 +15,7 @@ public class User
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userId;
+    private int id;
 
     private String firstName;
     private String lastName;
@@ -31,14 +31,28 @@ public class User
     @ManyToMany
     private List<Photo> likedPhotList;
 
-    public Long getUserId()
+    public User(String userName, String password)
     {
-        return userId;
+        this.userName = userName;
+        this.password = password;
     }
 
-    public void setUserId(Long userId)
+    public User(String userName, String password, String firstName, String lastName)
     {
-        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
     }
 
     public String getFirstName()

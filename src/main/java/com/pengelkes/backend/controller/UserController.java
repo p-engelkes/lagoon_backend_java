@@ -3,7 +3,6 @@ package com.pengelkes.backend.controller;
 import com.pengelkes.backend.model.User;
 import com.pengelkes.backend.service.UserService;
 import com.pengelkes.backend.validation.UserNameExistsException;
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletException;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by pengelkes on 27.10.2016.
@@ -39,7 +38,7 @@ public class UserController
     @RequestMapping(value="/register", method = RequestMethod.POST)
     public User registerUser(@RequestBody User user) throws UserNameExistsException
     {
-        return userService.registerNewUser(user);
+        return userService.registerNewUser(user).get();
     }
 
     @RequestMapping(value="/login", method = RequestMethod.POST)
@@ -53,25 +52,28 @@ public class UserController
         String userName = json.get("username");
         String password = passwordEncoder.encode(json.get("password"));
 
-        User user = userService.findByUserName(userName);
+        Optional<User> userOptional = userService.findByUserName(userName);
 
-        if (user == null)
+        if (userOptional.isPresent())
+        {
+            User user = userOptional.get();
+            String pwd = user.getPassword();
+
+            if (!password.equals(pwd))
+            {
+                throw new ServletException("Invalid login. Please check your name and password!");
+            }
+
+            return Jwts.builder()
+                    .setSubject(userName)
+                    .claim("roles", "user")
+                    .setIssuedAt(new Date())
+                    .signWith(SignatureAlgorithm.HS256, "secretkey")
+                    .compact();
+        } else
         {
             throw new ServletException("Username not found!");
+
         }
-
-        String pwd = user.getPassword();
-
-        if (!password.equals(pwd))
-        {
-            throw new ServletException("Invalid login. Please check your name and password!");
-        }
-
-        return Jwts.builder()
-                .setSubject(userName)
-                .claim("roles", "user")
-                .setIssuedAt(new Date())
-                .signWith(SignatureAlgorithm.HS256, "secretkey")
-                .compact();
     }
 }

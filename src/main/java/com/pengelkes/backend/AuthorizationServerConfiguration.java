@@ -1,12 +1,12 @@
 package com.pengelkes.backend;
 
-import com.pengelkes.backend.security.LagoonUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -25,7 +25,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter
 {
     private AuthenticationManager authenticationManager;
-    private LagoonUserDetailsService lagoonUserDetailsService;
+    private UserDetailsService userDetailsService;
     private PasswordEncoder passwordEncoder;
     private TokenStore tokenStore;
     private AccessTokenConverter accessTokenConverter;
@@ -33,7 +33,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Autowired
     public AuthorizationServerConfiguration(
             AuthenticationManager authenticationManager,
-            LagoonUserDetailsService lagoonUserDetailsService,
+            UserDetailsService userDetailsService,
             PasswordEncoder passwordEncoder,
             TokenStore tokenStore,
             AccessTokenConverter accessTokenConverter
@@ -41,7 +41,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     {
         super();
         this.authenticationManager = authenticationManager;
-        this.lagoonUserDetailsService = lagoonUserDetailsService;
+        this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
         this.tokenStore = tokenStore;
         this.accessTokenConverter = accessTokenConverter;
@@ -74,7 +74,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         endpoints
                 .tokenStore(tokenStore)
                 .authenticationManager(authenticationManager)
-                .userDetailsService(lagoonUserDetailsService)
+                .userDetailsService(userDetailsService)
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS)
                 .accessTokenConverter(accessTokenConverter);
     }
