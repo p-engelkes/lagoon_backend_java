@@ -1,7 +1,7 @@
 package com.pengelkes.backend.controller;
 
-import com.pengelkes.backend.model.User;
-import com.pengelkes.backend.service.UserService;
+import com.pengelkes.backend.service.user.User;
+import com.pengelkes.backend.service.user.UserService;
 import com.pengelkes.backend.validation.UserNameExistsException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

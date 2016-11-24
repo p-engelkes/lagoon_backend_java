@@ -1,6 +1,5 @@
-package com.pengelkes.backend.service;
+package com.pengelkes.backend.service.user;
 
-import com.pengelkes.backend.model.User;
 import com.pengelkes.backend.validation.UserNameExistsException;
 import org.springframework.stereotype.Service;
 

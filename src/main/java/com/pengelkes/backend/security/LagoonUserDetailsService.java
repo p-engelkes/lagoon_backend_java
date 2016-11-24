@@ -1,7 +1,7 @@
 package com.pengelkes.backend.security;
 
-import com.pengelkes.backend.model.User;
-import com.pengelkes.backend.service.UserService;
+import com.pengelkes.backend.service.user.User;
+import com.pengelkes.backend.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

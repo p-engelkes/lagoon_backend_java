@@ -1,6 +1,6 @@
 package com.pengelkes.backend.controller;
 
-import com.pengelkes.backend.service.UserService;
+import com.pengelkes.backend.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,8 +1,5 @@
-package com.pengelkes.backend.service.impl;
+package com.pengelkes.backend.service.user;
 
-import com.pengelkes.backend.model.User;
-import com.pengelkes.backend.service.UserService;
-import com.pengelkes.backend.service.UserServiceController;
 import com.pengelkes.backend.validation.UserNameExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

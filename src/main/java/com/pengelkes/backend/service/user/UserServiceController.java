@@ -1,7 +1,6 @@
-package com.pengelkes.backend.service;
+package com.pengelkes.backend.service.user;
 
 import com.pengelkes.backend.jooq.tables.records.UserAccountRecord;
-import com.pengelkes.backend.model.User;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.springframework.beans.factory.annotation.Autowired;

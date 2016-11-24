@@ -187,6 +187,22 @@
 											<outputSchema>public</outputSchema>
 										</schema>
 									</schemata>
+                                    <customTypes>
+                                        <customType>
+                                            <name>hstore</name>
+                                            <type>java.util.HashMap&lt;String, String&gt;</type>
+                                            <binding>com.pengelkes.backend.entity.converter.PostgresHstoreBinding
+                                            </binding>
+                                        </customType>
+                                    </customTypes>
+                                    <forcedTypes>
+                                        <forcedType>
+                                            <name>hstore</name>
+                                            <expression>
+                                                .*\.teams\.training_times
+                                            </expression>
+                                        </forcedType>
+                                    </forcedTypes>
 									<includes>.*</includes>
 									<excludes/>
 									<inputSchema>public</inputSchema>
