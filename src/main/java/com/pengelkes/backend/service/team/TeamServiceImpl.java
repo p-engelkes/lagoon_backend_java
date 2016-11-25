@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -31,5 +32,17 @@ public class TeamServiceImpl implements TeamService
     public Optional<Team> getByName(String name)
     {
         return teamServiceController.getByName(name);
+    }
+
+    @Override
+    public List<Team> getAllTeams()
+    {
+        return teamServiceController.getAllTeams();
+    }
+
+    @Override
+    public Optional<Team> getTeamByName(String name)
+    {
+        return teamServiceController.getTeamByName(name);
     }
 }

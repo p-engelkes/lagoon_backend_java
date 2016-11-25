@@ -2,6 +2,7 @@ package com.pengelkes.backend.service.team;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -13,4 +14,8 @@ public interface TeamService
     Optional<Team> create(Team team);
 
     Optional<Team> getByName(String name);
+
+    List<Team> getAllTeams();
+
+    Optional<Team> getTeamByName(String name);
 }

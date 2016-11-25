@@ -37,7 +37,5 @@ public class SetupBean
         {
 
         }
-
-        System.out.println(teamService.getByName("Herren 2. Mannschaft").get().getTrainingTimes());
     }
 }

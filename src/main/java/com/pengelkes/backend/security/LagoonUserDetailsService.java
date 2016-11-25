@@ -36,7 +36,6 @@ public class LagoonUserDetailsService implements UserDetailsService
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException
     {
         final Optional<User> userOptional = userService.findByUserName(userName);
-        System.out.println("User was loaded.");
         if (userOptional.isPresent())
         {
             User user = userOptional.get();

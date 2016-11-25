@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.pengelkes.backend.jooq.tables.Teams.TEAMS;
@@ -43,13 +44,29 @@ public class TeamServiceController
         return Optional.of(team);
     }
 
-    public Optional<Team> getByName(String name)
+    Optional<Team> getByName(String name)
     {
         TeamsRecord teamsRecord = dsl.selectFrom(TEAMS)
                 .where(TEAMS.TEAM_NAME.eq(name))
                 .fetchOne();
 
         return getTeamEntity(teamsRecord);
+    }
+
+    List<Team> getAllTeams()
+    {
+        return dsl.selectFrom(TEAMS)
+                .fetch()
+                .into(Team.class);
+    }
+
+    Optional<Team> getTeamByName(String name)
+    {
+        TeamsRecord record = dsl.selectFrom(TEAMS)
+                .where(TEAMS.TEAM_NAME.eq(name))
+                .fetchOne();
+
+        return getTeamEntity(record);
     }
 
     private Optional<Team> getTeamEntity(Record record)
