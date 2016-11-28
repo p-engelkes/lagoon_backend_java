@@ -31,21 +31,12 @@ public class TeamServiceController
     {
         TeamsRecord teamsRecord = null;
 
-        try
-        {
-            teamsRecord = dsl.newRecord(TEAMS);
-            teamsRecord.setTeamName(team.getTeamName());
-            teamsRecord.setTrainingTimes(team.getTrainingTimes());
-            teamsRecord.store();
-        } catch (Exception e)
-        {
-            System.out.println(e);
-        }
+        teamsRecord = dsl.newRecord(TEAMS);
+        teamsRecord.setTeamName(team.getTeamName());
+        teamsRecord.setTrainingTimes(team.getTrainingTimes());
+        teamsRecord.store();
 
-        if (teamsRecord != null)
-        {
-            team.setId(teamsRecord.getId());
-        }
+        team.setId(teamsRecord.getId());
         return Optional.of(team);
     }
 
