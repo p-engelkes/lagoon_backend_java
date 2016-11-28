@@ -31,10 +31,11 @@ public class TeamResources
     }
 
     @RequestMapping(value = "/team", method = RequestMethod.POST)
-    public Optional<Team> createTeam(@RequestBody String string)
+    public Team createTeam(@RequestBody String jsonString)
     {
-        //TODO: parse JSON to team
-        return Optional.empty();
+        Optional<Team> teamOptional = Team.fromJson(jsonString);
+        teamOptional.ifPresent(teamService::create);
+        return teamOptional.orElse(null);
     }
 
     @RequestMapping("/team")

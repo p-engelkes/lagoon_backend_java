@@ -1,13 +1,8 @@
 package com.pengelkes.backend.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -17,24 +12,6 @@ import java.io.IOException;
 /**
  * Created by pengelkes on 27.10.2016.
  */
-//@Configuration
-//public class CorsConfig
-//{
-//    @Bean
-//    public CorsFilter corsFilter() {
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowCredentials(true);
-//        configuration.addAllowedOrigin("*");
-//        configuration.addAllowedHeader("*");
-//        configuration.addAllowedMethod("GET");
-//        configuration.addAllowedMethod("PUT");
-//        configuration.addAllowedMethod("POST");
-//        configuration.addAllowedMethod("OPTIONS");
-//        source.registerCorsConfiguration("/**", configuration);
-//        return new CorsFilter(source);
-//    }
-//}
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)

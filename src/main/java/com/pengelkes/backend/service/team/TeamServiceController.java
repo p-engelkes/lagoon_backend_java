@@ -33,14 +33,19 @@ public class TeamServiceController
 
         try
         {
-            teamsRecord = dsl.newRecord(TEAMS, team);
+            teamsRecord = dsl.newRecord(TEAMS);
+            teamsRecord.setTeamName(team.getTeamName());
+            teamsRecord.setTrainingTimes(team.getTrainingTimes());
             teamsRecord.store();
         } catch (Exception e)
         {
             System.out.println(e);
         }
 
-        team.setId(teamsRecord.getId());
+        if (teamsRecord != null)
+        {
+            team.setId(teamsRecord.getId());
+        }
         return Optional.of(team);
     }
 
