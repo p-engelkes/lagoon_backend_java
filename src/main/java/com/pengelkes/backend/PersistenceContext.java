@@ -6,12 +6,10 @@ import org.jooq.impl.DefaultConfiguration;
 import org.jooq.impl.DefaultDSLContext;
 import org.jooq.impl.DefaultExecuteListenerProvider;
 import org.postgresql.jdbc3.Jdbc3PoolingDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -26,10 +24,6 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class PersistenceContext
 {
-
-    @Autowired
-    private Environment environment;
-
     @Bean
     @Primary
     public DataSource dataSource()

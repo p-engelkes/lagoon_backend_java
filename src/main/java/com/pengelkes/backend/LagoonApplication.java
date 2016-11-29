@@ -1,16 +1,13 @@
 package com.pengelkes.backend;
 
-import com.pengelkes.backend.config.JwtFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
@@ -22,6 +19,12 @@ public class LagoonApplication extends SpringBootServletInitializer
 {
     @Value("${signing-key:oui214hmui23o4hm1pui3o2hp4m1o3h2m1o43}")
     private String signingKey;
+
+    public static void main(String[] args)
+    {
+        SpringApplication.run(new Class[]{LagoonApplication.class, AuthorizationServerConfiguration.class,
+                ResourceServerConfiguration.class}, args);
+    }
 
 	@Bean
 	public PasswordEncoder passwordEncoder()
@@ -47,11 +50,5 @@ public class LagoonApplication extends SpringBootServletInitializer
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder)
     {
         return builder.sources(LagoonApplication.class);
-    }
-
-    public static void main(String[] args)
-    {
-        SpringApplication.run(new Class[]{LagoonApplication.class, AuthorizationServerConfiguration.class,
-                ResourceServerConfiguration.class}, args);
     }
 }
